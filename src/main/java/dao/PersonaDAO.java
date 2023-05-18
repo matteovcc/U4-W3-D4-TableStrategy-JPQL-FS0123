@@ -1,26 +1,29 @@
 package dao;
 
+import java.sql.Connection;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import entities.GaraDiAtletica;
+import entities.Persona;
 
-public class GaraDiAtleticaDAO {
+public class PersonaDAO {
 	private final EntityManager em;
+	static Connection conn = null;
 
-	public GaraDiAtleticaDAO(EntityManager em) {
+	public PersonaDAO(EntityManager em) {
 		this.em = em;
 	}
 
-	public void saveGara(GaraDiAtletica g) {
+	public void save(Persona p) {
 		EntityTransaction transaction = em.getTransaction();
 		transaction.begin();
-		em.persist(g);
+		em.persist(p);
 		transaction.commit();
 	}
 
-	public GaraDiAtletica getById(long id) {
-		GaraDiAtletica found = em.find(GaraDiAtletica.class, id);
+	public Persona getById(long id) {
+		Persona found = em.find(Persona.class, id);
 
 		if (found != null) {
 			System.out.println("Evento" + " " + id + " " + "trovato");
@@ -30,4 +33,5 @@ public class GaraDiAtleticaDAO {
 		return found;
 
 	}
+
 }

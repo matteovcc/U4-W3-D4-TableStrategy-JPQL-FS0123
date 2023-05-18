@@ -10,6 +10,9 @@ import javax.persistence.TypedQuery;
 import entities.Concerto;
 import entities.Concerto.GenereConcerto;
 import entities.Evento;
+import entities.GaraDiAtletica;
+import entities.PartitaDiCalcio;
+import entities.Persona;
 
 public class EventoDAO {
 	// QUA DENTRO AVREMO PURE BISOGNO DELL'ENTITY MANAGER OLTRE CHE AI METODI , LO
@@ -79,6 +82,31 @@ public class EventoDAO {
 		TypedQuery<Concerto> q = em.createQuery("SELECT c FROM Concerto c WHERE c.genere = :genere", Concerto.class);
 		q.setParameter("genere", genere);
 		return q.getResultList();
+	}
+
+	public List<PartitaDiCalcio> getPartiteVinteInCasa(String sqCasa) {
+		TypedQuery<PartitaDiCalcio> q = em.createNamedQuery("PartitaDiCalcio.getPartiteVinteInCasa",
+				PartitaDiCalcio.class);
+		return q.getResultList();
+	}
+
+	public List<PartitaDiCalcio> getPartiteVinteInTrasferta(String sqOspite) {
+		TypedQuery<PartitaDiCalcio> q = em.createNamedQuery("PartitaDiCalcio.getPartiteVinteInTrasferta",
+				PartitaDiCalcio.class);
+		return q.getResultList();
+	}
+
+	public List<PartitaDiCalcio> getPartitePareggiate() {
+		TypedQuery<PartitaDiCalcio> q = em.createNamedQuery("PartitaDiCalcio.getPartitePareggiate",
+				PartitaDiCalcio.class);
+		return q.getResultList();
+	}
+
+	public GaraDiAtletica getGareDiAtleticaPerVincitore(Persona vincitore) {
+		TypedQuery<GaraDiAtletica> q = em.createNamedQuery("GaraDiAtletica.getGareDiAtleticaPerVincitore",
+				GaraDiAtletica.class);
+		q.setParameter("vincitore", vincitore);
+		return q.getSingleResult();
 	}
 
 }

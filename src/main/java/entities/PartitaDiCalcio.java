@@ -3,6 +3,7 @@ package entities;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -16,6 +17,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
+@NamedQuery(name = "PartitaDiCalcio.getPartiteVinteInCasa", query = "SELECT p FROM PartitaDiCalcio p WHERE p.sqCasa = p.sqVincente")
+@NamedQuery(name = "PartitaDiCalcio.getPartiteVinteInTrasferta", query = "SELECT p FROM PartitaDiCalcio p WHERE p.sqOspite = p.sqVincente")
+@NamedQuery(name = "PartitaDiCalcio.getPartitePareggiate", query = "SELECT p FROM PartitaDiCalcio p WHERE p.sqVincente = null")
 public class PartitaDiCalcio extends Evento {
 	private String sqCasa;
 	private String sqOspite;
